@@ -1,0 +1,23 @@
+
+<body>
+
+	
+<div class = "container-fluid">
+	{{#with quizInfo}}
+	{{> countDown}} 
+	{{> question questionName = questionName}} 
+	<div class="row">
+			<div class="col-lg-6">
+			 	{{#each altLeft}}
+        			{{> alternativ text = text}}
+      			 {{/each}}
+	    	</div>
+	    	<div class="col-lg-6">
+			 	{{#each altRight}}
+        			{{> alternativ text = text}}
+      		 	{{/each}}
+	    	</div>
+	</div>
+	{{/with}}
+</div>  
+</body>

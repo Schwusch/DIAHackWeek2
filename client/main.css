@@ -1,1 +1,21 @@
-/* CSS declarations go here */
+body{
+	text-align: center;
+}
+#questions-container{
+	border: 2px solid black;
+	padding-top: 120px;
+	margin-left: 60px;
+	width: 90%;
+	height: 400px;
+}
+#question{
+	font-size: 40px;
+}
+
+.alternativ{
+	padding: 40px;
+	font-size: 35px;
+	border: 2px solid black;
+	margin-left: -20px;
+	margin-right: -20px;
+}
