@@ -19,10 +19,7 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 insecure                # Allow all DB writes from clients (for prototyping)
 twbs:bootstrap
-<<<<<<< HEAD
 http
-=======
 flyandi:reactive-countdown
 session
 kadira:flow-router
->>>>>>> 22c6279ff1206ce9d4ae34f2a6f22ee0dac3ec03
