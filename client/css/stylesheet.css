@@ -1,6 +1,24 @@
 ﻿.text-letter,
 .text-logo,
 .text-std,
+.button{
+    width: 100%;
+    height: 150px;
+    font-size: 30px;
+    margin-top: 20px;
+}
+.button.true.selected.dontShowAnswer{
+    background-color: grey; 
+}
+.button.false.selected.dontShowAnswer{
+    background-color: grey; 
+}
+.button.false.selected.showAnswer{
+    background-color: red; 
+}
+.button.true.showAnswer{
+    background-color: green; 
+}
 text {
     font-family: monotype_bosisstd_medium;
     text-align: left;

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 import {Questions } from '../imports/api/questions.js';
-import { QuizNum } from '../imports/api/quizNum.js'
+import { QuizIndex } from '../imports/api/quizIndex.js'
 
 function generate_questions () {
   HTTP.call("GET",
@@ -21,30 +21,43 @@ Meteor.startup(() => {
  Questions.insert({
    id:"0",
    altLeft: [
-    { text: 'Malmö' },
-    { text: 'Lund' },
+     { text: 'Stadshuset',
+      correct:"false" },
+    { text: 'true',
+      correct:"true" },
   ],
   altRight: [
-    { text: 'Stockholm' },
-    { text: 'Peking' },
+     { text: 'Stadshuset',
+      correct:"false" },
+     { text: 'Stadshuset',
+      correct:"false" },
   ],
   questionName: 'Vad heter Malmös största byggnad?',
  });
  Questions.insert({
     id:"1",
    altLeft: [
-    { text: 'Hje' },
-    { text: 'VA?' },
+    { text: 'Hje',
+      correct:"false",
+       index:"A"},
+    { text: 'VA?',
+      correct:"false",
+      index:"B" },
   ],
   altRight: [
-    { text: 'Big Ben' },
-    { text: 'Stadshuset' },
+    { text: 'Big Ben',
+      correct:"false",
+       index:"C"},
+    { text: 'Stadshuset',
+      correct:"true",
+      index:"D" },
   ],
   questionName: 'Vad heter staden du är i?',
  });
   });
-QuizNum.remove({});
-QuizNum.insert({
+QuizIndex.remove({});
+QuizIndex.insert({
 	id:"quizNum",
 	quizNum:"0",
+  showAnswer:"dontShowAnswer",
 })
