@@ -11,7 +11,6 @@ import './countDown.html';
 import './mainScreen.html';
 import './phoneScreen.html';
 import './phoneScreenAlt.html';
-import './charts.html';
  
 Template.mainScreen.helpers({
   quizInfo(){
@@ -106,6 +105,3 @@ Template.phoneScreenAlt.helpers({
   },
 });
 
-Template.charts.onRendered(function(){
-  console.log("value");
-});

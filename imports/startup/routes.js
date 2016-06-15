@@ -15,15 +15,10 @@ FlowRouter.route('/', {
     BlazeLayout.render('body', { main: 'mainScreen'});
   },
 });
+
 FlowRouter.route('/phoneScreen', {
   name: 'phoneScreen',
   action() {
     BlazeLayout.render('body', { main: 'phoneScreen'});
-  },
-});
-FlowRouter.route('/charts', {
-  name: 'charts',
-  action() {
-    BlazeLayout.render('body', { main: 'chars'});
   },
 });
