@@ -22,3 +22,4 @@ twbs:bootstrap
 flyandi:reactive-countdown
 session
 kadira:flow-router
+kadira:blaze-layout
