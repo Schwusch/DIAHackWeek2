@@ -1,5 +1,6 @@
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { Questions} from '../api/questions.js';
 import { QuizIndex} from '../api/quizIndex.js'
@@ -12,7 +13,51 @@ import './mainScreen.html';
 import './phoneScreen.html';
 import './phoneScreenAlt.html';
 import './charts.html';
- 
+
+var Highcharts = require('highcharts/highstock');
+Template.charts.helpers({
+    createChart: function () {
+      // Gather data: 
+          var qIndex = QuizIndex.findOne({id:"qIndex"});
+          var obj = Questions.findOne({id:qIndex.currentIndex});
+          var answers = obj.answers;
+          var total_answers = 0;
+          for(var i = 0; i < answers.length; i++) {
+              total_answers += answers[i].timesGuessed;
+          }
+
+            var tasksData = [
+            {
+                y: answers[0].timesGuessed,
+                name: answers[0].text
+             }, {
+                 y: answers[1].timesGuessed,
+                 name: answers[1].text
+             }, {
+                 y: answers[2].timesGuessed,
+                 name: answers[2].text
+             }, {
+                 y: answers[3].timesGuessed,
+                 name: answers[3].text
+             }];
+
+      // Use Meteor.defer() to craete chart after DOM is ready:
+      Meteor.defer(function() {
+        // Create standard Highcharts chart with options:
+        Highcharts.chart('chart', {
+          title: obj.question,
+          series: [{
+            type: 'pie',
+            data: tasksData
+          }]
+        });
+      });
+    }
+});
+Template.charts.onCreated(function() {
+   Meteor.subscribe('questions');
+   Meteor.subscribe('quizIndex');
+});
 Template.mainScreen.helpers({
   quizInfo(){
     var qIndex = QuizIndex.findOne({id:"qIndex"});
@@ -32,8 +77,6 @@ Template.phoneScreen.helpers({
     var qIndex = QuizIndex.findOne({id:"qIndex"});
     var obj = Questions.findOne({id:qIndex.currentIndex});
 
-    console.log(obj);
-
     obj.answer_a = obj.answers[0].text;
     obj.answer_b = obj.answers[1].text;
     obj.answer_c = obj.answers[2].text;
@@ -49,35 +92,19 @@ Template.phoneScreen.helpers({
           return "";
         }
       },
+
   });
 
 
 Template.phoneScreen.onRendered(function() {
 
     var state = Session.get('state');
-    if(state === 0) { // question changed
-        
-                $(".button").removeClass("showAnswer").removeClass("selected");
-                $(".button").click(function() {
-
-
-              });
-
-              } else if (state === 1) { // show result
-
-                $(".button").unbind();
-        
-                $(".button").addClass("showAnswer");
- 
-              } else { // show chart
-                  console.log(state);
-              }
 });
 
 Template.phoneScreen.events({
 "click": function(event) {
       var target = event.target;
-      $(".selected").removeClass("selected");
+      $(".selected").not(".showAnswer").removeClass("selected");
       $(target).not(".showAnswer").addClass("selected");
 }
 });
@@ -94,7 +121,17 @@ Template.phoneScreen.onCreated(function(){
             var state = fields.state;
             Session.set('state', state);
 
-              
+            if(state == 0) {
+              FlowRouter.go("/phoneScreen");
+            } else if (state == 1) {
+              var q = $(".button.selected").val();
+              if(q != undefined) {
+                Meteor.call("incrementGuesses", q);
+              }
+              console.log(q);
+            } else if (state == 2) {
+              FlowRouter.go("/charts");
+            }
     }     
 
     },
@@ -131,7 +168,4 @@ Template.countDown.helpers({
 			var time = countdown.get()
 			return Math.floor((time / totalTime) * 100);
 		},
-});
-Template.charts.onRendered(function(){
-  console.log("value");
 });

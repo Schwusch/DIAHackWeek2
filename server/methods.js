@@ -1,8 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
 import { QuizIndex } from '../imports/api/quizIndex.js';
-import { Result } from '../imports/api/result.js';
-
+import { Questions} from '../imports/api/questions.js';
 Meteor.methods({
 	updateState: function() {
 	var qIndex = QuizIndex.findOne({id:"qIndex"});
@@ -24,9 +23,12 @@ Meteor.methods({
     }
 	},
 	
-	setResult: function (question) {
-    Result.insert({question});
-	},
+    incrementGuesses: function(alternative) {
+
+        var qIndex = QuizIndex.findOne({"id":"qIndex"});
+
+        Questions.update({"id":qIndex.currentIndex, "answers.text" : alternative}, {$inc: {"answers.$.timesGuessed": 1}});
+    },
 });
 
 
