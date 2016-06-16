@@ -28,12 +28,24 @@ Template.alternatives.helpers({
     var obj = Questions.findOne({id:qIndex.currentIndex});
 
     obj.answer_a = obj.answers[0].text;
+    obj.correct_a = obj.answers[0].correct;
     obj.answer_b = obj.answers[1].text;
+    obj.correct_b = obj.answers[1].correct;
     obj.answer_c = obj.answers[2].text;
+    obj.correct_c = obj.answers[2].correct;
     obj.answer_d = obj.answers[3].text;
-
+    obj.correct_d = obj.answers[3].correct;
     return obj;
-      }
+      },
+      showAnswer() {
+        var state = Session.get('state');
+        if(state == 1 || state == 2) {
+          return "showAnswer";
+        } else {
+          return "";
+        }
+      },
+
 });
 
 Template.alternatives.onCreated(function  () {
@@ -133,12 +145,6 @@ Template.phoneScreen.helpers({
 
   });
 
-
-Template.phoneScreen.onRendered(function() {
-
-    var state = Session.get('state');
-});
-
 Template.phoneScreen.events({
 "click": function(event) {
       var target = event.target;
@@ -188,11 +194,25 @@ Template.alternatives.onRendered(function(){
     Meteor.call("updateState");
 
     countdown.start();
+
+    var state = Session.get("state");
+    console.log(state);
+
+    if( state == 2) {
+    } else if (state == undefined || state == 0) {
+      countdown.remove(15);
+    } else if (state == 1) {
+      countdown.remove(12);
+    }
+    
 });
 });
 
-var totalTime = 15;
-var countdown = new ReactiveCountdown(totalTime, {
+var time_main = 20;
+var time_result = 5;
+var time_charts = 8;
+
+var countdown = new ReactiveCountdown(time_main, {
 	interval: 10,
 	steps: 0.01,
 
@@ -204,6 +224,6 @@ Template.countDown.helpers({
 	return time; },
 		progressNow: function() {
 			var time = countdown.get()
-			return Math.floor((time / totalTime) * 100);
+			return Math.floor((time / time_main) * 100);
 		},
 });

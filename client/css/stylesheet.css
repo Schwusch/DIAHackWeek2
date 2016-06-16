@@ -1,8 +1,20 @@
 ﻿body {
-	height: 100vp;
-	width: 100vp;
+	height: 100vh;
+	width: 100%;
 }
-
+.phoneAlt .button{
+    width: 100%;
+    height:120px;
+    font-size: 30px;
+    color:white;
+    background-color:#1ba1e2; 
+}
+#question .text-std{
+    height: 400px;
+}
+#question .text-std div{
+    vertical-align: middle;
+}
 .text-letter,
 .text-logo,
 .text-std,
@@ -13,7 +25,7 @@
     margin-top: 20px;
 }
 .button.selected{
-    background-color: black; 
+    background-color: grey; 
 }
 .button.true.showAnswer{
     background-color: green; 
@@ -21,6 +33,10 @@
 .button.false.selected.showAnswer{
     background-color: red; 
 }
+.answer.true.showAnswer{
+    background-color: green; 
+}
+
 text {
     font-family: monotype_bosisstd_medium;
     text-align: left;
@@ -39,7 +55,6 @@ text {
     text-align: center;
     margin: -5px;
     padding: 0;
-    box-shadow: 0 0 1px 2px #7e0a0a;
 }
 
 #wrapper {
@@ -70,7 +85,8 @@ text {
 #question,
 .answer {
     /*gradient background*/
-    background-color: #E53935;
+    background-color: #1ba1e2;
+    color:white;
     /*background: -webkit-gradient(linear, left top, left bottom, from(#7E57C2), to(#4527A0));
     background: -webkit-linear-gradient(top, #7E57C2, #4527A0);
     background: -moz-linear-gradient(top, #7E57C2, #4527A0);
