@@ -7,12 +7,60 @@ import { QuizIndex} from '../api/quizIndex.js'
  
 import './body.html';
 import './question.html';
-import './alternativ.html';
+import './alternatives.html';
 import './countDown.html';
 import './mainScreen.html';
 import './phoneScreen.html';
 import './phoneScreenAlt.html';
 import './charts.html';
+
+Template.question.helpers({
+  question(){
+    var qIndex = QuizIndex.findOne({id:"qIndex"});
+    var obj = Questions.findOne({id:qIndex.currentIndex});
+    return obj.question;
+      }
+});
+
+Template.alternatives.helpers({
+  quizInfo(){
+    var qIndex = QuizIndex.findOne({id:"qIndex"});
+    var obj = Questions.findOne({id:qIndex.currentIndex});
+
+    obj.answer_a = obj.answers[0].text;
+    obj.answer_b = obj.answers[1].text;
+    obj.answer_c = obj.answers[2].text;
+    obj.answer_d = obj.answers[3].text;
+
+    return obj;
+      }
+});
+
+Template.alternatives.onCreated(function  () {
+   Meteor.subscribe('questions');
+   Meteor.subscribe('quizIndex', {
+    onReady: function() {
+
+      QuizIndex.find({id:"qIndex"}).observeChanges({
+        changed: function(id, fields) {
+
+          if(fields.currentIndex == undefined) {
+            var state = fields.state;
+            Session.set('state', state);
+
+            if(state == 0) {
+              FlowRouter.go("/mainscreen");
+            } else if (state == 1) {
+            } else if (state == 2) {
+              FlowRouter.go("/charts");
+            }
+    }     
+
+    },
+  });
+    },
+   });
+});
 
 var Highcharts = require('highcharts/highstock');
 Template.charts.helpers({
@@ -59,17 +107,7 @@ Template.charts.onCreated(function() {
    Meteor.subscribe('quizIndex');
 });
 Template.mainScreen.helpers({
-  quizInfo(){
-    var qIndex = QuizIndex.findOne({id:"qIndex"});
-    var obj = Questions.findOne({id:qIndex.currentIndex});
 
-    obj.answer_a = obj.answers[0].text;
-    obj.answer_b = obj.answers[1].text;
-    obj.answer_c = obj.answers[2].text;
-    obj.answer_d = obj.answers[3].text;
-
-    return obj;
-      }
   });
 
 Template.phoneScreen.helpers({
@@ -122,7 +160,7 @@ Template.phoneScreen.onCreated(function(){
             Session.set('state', state);
 
             if(state == 0) {
-              FlowRouter.go("/phoneScreen");
+              FlowRouter.go("/");
             } else if (state == 1) {
               var q = $(".button.selected").val();
               if(q != undefined) {
@@ -153,7 +191,7 @@ Template.countDown.onRendered(function(){
 });
 });
 
-var totalTime = 5;
+var totalTime = 10;
 var countdown = new ReactiveCountdown(totalTime, {
 	interval: 10,
 	steps: 0.01,

@@ -2,11 +2,8 @@
 		{{> countDown}}
 	{{#with quizInfo}}
 
-	        <!-- question -->
-        <div class="col-lg-12">
-            <h1 class="text-std" id="question">
-                {{question}} 
-            </h1>
+                {{> Template.dynamic questionName=question template=question}}    
+           
             <!-- question image -->
             <div class=" row">
                 <div class="col-lg-12">
@@ -15,91 +12,5 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-	
-        <!-- alternatives -->
-        <div class="container">
-            <div class="container-bottom">
-
-                <!-- top answers -->
-                <div class="row">
-
-                    <!-- answer container -->
-                    <div class="col-lg-6">
-                        <div class="answer">
-                            <div class="container">
-
-                                <!-- letter -->
-                                <div class="col-lg-1">
-                                    <h1 class="text-letter">A</h1>
-                                </div>
-
-                                <!-- answer -->
-                                <div class="col-lg-11">
-                                    <h1 class="text-std" id="answer_a">{{answer_a}}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- / alternative -->
-                    <!-- answer container -->
-                    <div class="col-lg-6">
-                        <div class="answer">
-                            <div class="container">
-
-                                <!-- letter -->
-                                <div class="col-lg-1">
-                                    <h1 class="text-letter">B</h1>
-                                </div>
-
-                                <!-- answer -->
-                                <div class="col-lg-11">
-                                    <h1 class="text-std" id="answer_b">{{answer_b}}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- / alternative -->
-                </div>
-
-                <!-- bottom answers -->
-                <div class="row">
-
-                    <!-- answer container -->
-                    <div class="col-lg-6">
-                        <div class="answer">
-                            <div class="container">
-
-                                <!-- letter -->
-                                <div class="col-lg-1">
-                                    <h1 class="text-letter">C</h1>
-                                </div>
-
-                                <!-- answer -->
-                                <div class="col-lg-11">
-                                    <h1 class="text-std" id="answer_c">{{answer_c}}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- / alternative -->
-                    <!-- answer container -->
-                    <div class="col-lg-6">
-                        <div class="answer">
-                            <div class="container">
-
-                                <!-- letter -->
-                                <div class="col-lg-1">
-                                    <h1 class="text-letter">D</h1>
-                                </div>
-
-                                <!-- answer -->
-                                <div class="col-lg-11">
-                                    <h1 class="text-std" id="answer_d">{{answer_d}}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- / alternative -->
-                </div>
-            </div> <!-- container bottom -->
-        </div>
 	{{/with}}
 </template>	

@@ -21,10 +21,10 @@
           for(var i = 0; i < questions.length; i++) {
               var q = questions[i];
               
-              q.answers[0].timesGuessed = 1;
-              q.answers[1].timesGuessed = 1;
-              q.answers[2].timesGuessed = 1;
-              q.answers[3].timesGuessed = 1;
+              q.answers[0].timesGuessed = 0;
+              q.answers[1].timesGuessed = 0;
+              q.answers[2].timesGuessed = 0;
+              q.answers[3].timesGuessed = 0;
               q.id = i;
 
               Questions.insert(q);

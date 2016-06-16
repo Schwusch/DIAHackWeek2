@@ -12,7 +12,7 @@ FlowRouter.notFound = {
 FlowRouter.route('/mainscreen', {
   name: 'mainScreen',
   action() {
-    BlazeLayout.render('body', { main: 'mainScreen'});
+    BlazeLayout.render('body', { main: 'question', lower: 'alternatives'});
   },
 });
 

@@ -1,7 +1,11 @@
 <template name="question">
+		{{> countDown}}
    	<div class="row">
-		<div class="col-lg-12" id="questions-container">
-			<div id="question">{{questionName}}</div>
+	        <!-- question -->
+        <div class="col-lg-12">
+            <h1 class="text-std" id="question">
+			<div id="question">{{question}}</div>
+			 </h1>
 	    </div>
 	</div>
 </template>
