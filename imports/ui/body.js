@@ -191,7 +191,7 @@ Template.alternatives.onRendered(function(){
 });
 });
 
-var totalTime = 5;
+var totalTime = 15;
 var countdown = new ReactiveCountdown(totalTime, {
 	interval: 10,
 	steps: 0.01,

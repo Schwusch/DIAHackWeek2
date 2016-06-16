@@ -30,3 +30,9 @@ FlowRouter.route('/mainscreencharts', {
     BlazeLayout.render('body', { main: 'charts',lower: 'alternatives'});
   },
 });
+FlowRouter.route('/charts', {
+  name: 'charts',
+  action() {
+    BlazeLayout.render('body', { main: 'charts',});
+  },
+});
