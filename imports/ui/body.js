@@ -11,97 +11,127 @@ import './countDown.html';
 import './mainScreen.html';
 import './phoneScreen.html';
 import './phoneScreenAlt.html';
+import './charts.html';
  
 Template.mainScreen.helpers({
   quizInfo(){
-    var quizIndex = Session.get("quizIndex");
-    return Questions.findOne({id:quizIndex.toString()});
+    var qIndex = QuizIndex.findOne({id:"qIndex"});
+    var obj = Questions.findOne({id:qIndex.currentIndex});
+
+    obj.answer_a = obj.answers[0].text;
+    obj.answer_b = obj.answers[1].text;
+    obj.answer_c = obj.answers[2].text;
+    obj.answer_d = obj.answers[3].text;
+
+    return obj;
       }
   });
 
 Template.phoneScreen.helpers({
   quizInfo(){
-    var quizIndex1 = QuizIndex.findOne({id:"quizNum"});
-    return Questions.findOne({id:quizIndex1.quizNum});
-      }
+    var qIndex = QuizIndex.findOne({id:"qIndex"});
+    var obj = Questions.findOne({id:qIndex.currentIndex});
+
+    console.log(obj);
+
+    obj.answer_a = obj.answers[0].text;
+    obj.answer_b = obj.answers[1].text;
+    obj.answer_c = obj.answers[2].text;
+    obj.answer_d = obj.answers[3].text;
+
+    return obj;
+      },
+      showAnswer() {
+        var state = Session.get('state');
+        if(state == 1) {
+          return "showAnswer";
+        } else {
+          return "";
+        }
+      },
   });
+
+
+Template.phoneScreen.onRendered(function() {
+
+    var state = Session.get('state');
+    if(state === 0) { // question changed
+        
+                $(".button").removeClass("showAnswer").removeClass("selected");
+                $(".button").click(function() {
+
+
+              });
+
+              } else if (state === 1) { // show result
+
+                $(".button").unbind();
+        
+                $(".button").addClass("showAnswer");
+ 
+              } else { // show chart
+                  console.log(state);
+              }
+});
+
+Template.phoneScreen.events({
+"click": function(event) {
+      var target = event.target;
+      $(".selected").removeClass("selected");
+      $(target).not(".showAnswer").addClass("selected");
+}
+});
+
 Template.phoneScreen.onCreated(function(){
    Meteor.subscribe('questions');
-   Meteor.subscribe('quizIndex');
+   Meteor.subscribe('quizIndex', {
+    onReady: function() {
+
+      QuizIndex.find({id:"qIndex"}).observeChanges({
+        changed: function(id, fields) {
+
+          if(fields.currentIndex == undefined) {
+            var state = fields.state;
+            Session.set('state', state);
+
+              
+    }     
+
+    },
+  });
+    },
+   });
 });
 Template.mainScreen.onCreated(function(){
    Meteor.subscribe('questions');
-});
-Template.body.onCreated(function(){
-  Session.set("quizIndex",0);
-  Session.set("showCorrect","dontShowAnswer");
+   Meteor.subscribe('quizIndex');
 });
 
 Template.countDown.onRendered(function(){
    countdown.start(function() {
-    var index = Session.get("quizIndex");
-    var showAnser = Session.get("showCorrect");
-    if(showAnser == "dontShowAnswer"){
-      Session.set("showCorrect","showAnswer");
-      Meteor.call('setShowCorrect', "showAnswer");
-       console.log(showAnser);
-    }else{
-        console.log(showAnser);
-      if(index==1){
-      Meteor.call('setQuizNum', "0");
-      Session.set("quizIndex",0);
-
-     }else{
-      Meteor.call('setQuizNum', "1");
-      Session.set("quizIndex",1);
-     }
-     Session.set("showCorrect","dontShowAnswer");
-     Meteor.call('setShowCorrect', "dontShowAnswer");
-    }
     
+    Meteor.call("updateState");
+
     countdown.start();
 });
 });
 
- var countdown = new ReactiveCountdown(10);
+var totalTime = 5;
+var countdown = new ReactiveCountdown(totalTime, {
+	interval: 10,
+	steps: 0.01,
 
-Template.body.events({
-  'click'(event) {
-    const target = event.target;
-    $(".selected").not(".showAnswer").removeClass("selected");
-    $(target).not(".showAnswer").addClass("selected");
-    var sessionIndex = Session.get("questionIndex");
-    var dbIndex = QuizIndex.findOne({id:"quizNum"}).quizNum;
-   // if(sessionIndex != dbIndex){
-   
-         var list = [];
-        $("input[data").each(function(){
-          console.log("Loop");
-         var data =  $(this).attr("data");
-         var question = $(this).val();
-         var answer = $(this).hasClass("selected");
-        list.push({
-          "data":data,
-          "question":question,
-          "answer":answer
-         });
-        })
-        console.log(list);
-        Session.set("questionIndex", dbIndex);
-     // }
-    },
 });
-
 Template.countDown.helpers({
-	getCountdown: function() {
-		var time = countdown.get()
-		return time;
-	},
-});
-Template.phoneScreenAlt.helpers({
-  showAnswer: function() {
-    var quizIndex1 = QuizIndex.findOne({id:"quizNum"});
-    return quizIndex1.showAnswer;
-  },
-});
 
+		getCountdown: function() {
+		var time = Math.floor(countdown.get())
+	return time; },
+		progressNow: function() {
+			var time = countdown.get()
+			return Math.floor((time / totalTime) * 100);
+		},
+});
+Template.charts.onRendered(function(){
+  console.log("value");
+});

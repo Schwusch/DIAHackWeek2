@@ -7,17 +7,14 @@
     font-size: 30px;
     margin-top: 20px;
 }
-.button.true.selected.dontShowAnswer{
-    background-color: grey; 
-}
-.button.false.selected.dontShowAnswer{
-    background-color: grey; 
-}
-.button.false.selected.showAnswer{
-    background-color: red; 
+.button.selected{
+    background-color: black; 
 }
 .button.true.showAnswer{
     background-color: green; 
+}
+.button.false.selected.showAnswer{
+    background-color: red; 
 }
 text {
     font-family: monotype_bosisstd_medium;
@@ -68,17 +65,13 @@ text {
 #question,
 .answer {
     /*gradient background*/
-    border-top: 1px solid #ff0000;
-    background: #cd2a32;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f44651), to(#cd2a32));
-    background: -webkit-linear-gradient(top, #f44651, #cd2a32);
-    background: -moz-linear-gradient(top, #f44651, #cd2a32);
-    background: -o-linear-gradient(top, #f44651, #cd2a32);
+    background-color: #E53935;
+    /*background: -webkit-gradient(linear, left top, left bottom, from(#7E57C2), to(#4527A0));
+    background: -webkit-linear-gradient(top, #7E57C2, #4527A0);
+    background: -moz-linear-gradient(top, #7E57C2, #4527A0);
+    background: -o-linear-gradient(top, #7E57C2, #4527A0);*/
     /*rounded corners*/
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    border-radius: 6px;
-    box-shadow: 0 0 1px 2px #7e0a0a;
+
     /*padding*/
     padding: 20px;
     margin: 10px;
@@ -123,3 +116,11 @@ ul {
         float: left;
         width:50%;
     }
+.progress-bar {
+    height: 20px;
+    -webkit-transition: width .1s ease;
+    -moz-transition: width .1s ease;
+    -ms-transition: width .1s ease;
+    -o-transition: width .1s ease;
+    transition: width .1s ease;
+}

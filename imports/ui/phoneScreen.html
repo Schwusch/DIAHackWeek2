@@ -1,10 +1,7 @@
 <template name="phoneScreen">
 	{{#with quizInfo}}
-	 	{{#each altLeft}}
-        	{{> phoneScreenAlt text = text correct = correct info=index}}
-      	{{/each}}
-		{{#each altRight}}
-        	{{> phoneScreenAlt text = text correct = correct info=index}}
+	 	{{#each answers}}
+        	{{> phoneScreenAlt showAnswer = showAnswer text = text correct = correct info=index}}
       	{{/each}}
 	 {{/with}}
 </template>	

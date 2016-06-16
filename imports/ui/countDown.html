@@ -1,5 +1,15 @@
 <template name="countDown">
 
- <big>{{getCountdown}}</big> seconds left!
 
+ 
+ <div class="row">
+<big>{{getCountdown}}</big> seconds left!
+<div class="progress">
+    
+  <div class="progress-bar" role="progressbar"
+  aria-valuemin="0" aria-valuemax="100" style="width:{{progressNow}}%;">
+
+  </div>
+</div>
+</div>
 </template>
