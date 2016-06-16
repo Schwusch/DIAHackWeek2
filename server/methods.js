@@ -27,7 +27,9 @@ Meteor.methods({
 
         var qIndex = QuizIndex.findOne({"id":"qIndex"});
 
-        Questions.update({"id":qIndex.currentIndex, "answers.text" : alternative}, {$inc: {"answers.$.timesGuessed": 1}});
+        Questions.update({"id":qIndex.currentIndex, 
+            "answers.text" : alternative}, 
+            {$inc: {"answers.$.timesGuessed": 1}});
     },
 });
 

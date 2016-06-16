@@ -52,7 +52,7 @@ Template.alternatives.onCreated(function  () {
               FlowRouter.go("/mainscreen");
             } else if (state == 1) {
             } else if (state == 2) {
-              FlowRouter.go("/charts");
+              FlowRouter.go("/mainscreencharts");
             }
     }     
 
@@ -182,7 +182,7 @@ Template.mainScreen.onCreated(function(){
    Meteor.subscribe('quizIndex');
 });
 
-Template.countDown.onRendered(function(){
+Template.alternatives.onRendered(function(){
    countdown.start(function() {
     
     Meteor.call("updateState");
@@ -191,7 +191,7 @@ Template.countDown.onRendered(function(){
 });
 });
 
-var totalTime = 10;
+var totalTime = 5;
 var countdown = new ReactiveCountdown(totalTime, {
 	interval: 10,
 	steps: 0.01,
