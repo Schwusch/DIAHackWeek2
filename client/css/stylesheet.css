@@ -11,8 +11,21 @@
 }
 #question .text-std{
     height: 400px;
+    display: table;
+    text-align: center;
+    width: 100%
+
 }
-#question .text-std div{
+.countdown-container{
+    text-align: center;
+}
+.countdown{
+    width: 420px;
+    display: inline-block;
+}
+#question .text-std span
+{
+    display: table-cell;
     vertical-align: middle;
 }
 .text-letter,
@@ -75,7 +88,7 @@ text {
 
 .container-bottom {
     position: fixed;
-    bottom: 0;
+    bottom: 40px;
     left: 0;
     padding: 0px;
     width: 100%;
@@ -106,7 +119,6 @@ text {
 #timer,
 #question {
     font-size: 40px;
-    margin-top: 70px;
     text-align: center;
     min-height: 129px;
 }

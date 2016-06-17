@@ -9,7 +9,6 @@ import './body.html';
 import './question.html';
 import './alternatives.html';
 import './countDown.html';
-import './mainScreen.html';
 import './phoneScreen.html';
 import './phoneScreenAlt.html';
 import './charts.html';
@@ -41,6 +40,14 @@ Template.alternatives.helpers({
         var state = Session.get('state');
         if(state == 1 || state == 2) {
           return "showAnswer";
+        } else {
+          return "";
+        }
+      },
+      animation() {
+        var state = Session.get('state');
+        if(state == 1) {
+          return "bounce";
         } else {
           return "";
         }
@@ -118,9 +125,6 @@ Template.charts.onCreated(function() {
    Meteor.subscribe('questions');
    Meteor.subscribe('quizIndex');
 });
-Template.mainScreen.helpers({
-
-  });
 
 Template.phoneScreen.helpers({
   quizInfo(){
@@ -183,10 +187,6 @@ Template.phoneScreen.onCreated(function(){
     },
    });
 });
-Template.mainScreen.onCreated(function(){
-   Meteor.subscribe('questions');
-   Meteor.subscribe('quizIndex');
-});
 
 Template.alternatives.onRendered(function(){
    countdown.start(function() {
@@ -196,7 +196,6 @@ Template.alternatives.onRendered(function(){
     countdown.start();
 
     var state = Session.get("state");
-    console.log(state);
 
     if( state == 2) {
     } else if (state == undefined || state == 0) {
