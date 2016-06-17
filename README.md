@@ -2,6 +2,8 @@
 Meteor app with two endpoints, localhost:3000 and localhost:3000/mainscreen
 
 Requires build.dia.mah.se to be up and running.
+
+Presentation in [docs](docs/Presentation_DIA_Hackweek2.pdf)
 ##Bus screen: /mainscreen
 ![Screenshot1](http://imgur.com/PDofT8t.png)
 ![Screenshot2](http://i.imgur.com/EavPOBj.png)
