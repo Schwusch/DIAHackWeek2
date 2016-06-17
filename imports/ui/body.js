@@ -12,6 +12,7 @@ import './countDown.html';
 import './phoneScreen.html';
 import './phoneScreenAlt.html';
 import './charts.html';
+import './navbar.html';
 
 Template.question.helpers({
   question(){

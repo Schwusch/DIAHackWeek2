@@ -2,18 +2,31 @@
 	height: 100vh;
 	width: 100%;
 }
+.navbar{
+    background-color: transparent;
+    position: relative;
+}
+#logo{
+    width: auto;
+    height: 50px;
+     position: absolute;
+    left: 50%;
+    margin-left: -110px !important;  /* 50% of your logo width */
+    display: block;
+}
 .phoneAlt .button{
     width: 100%;
     height:120px;
     font-size: 30px;
     color:white;
-    background-color:#1ba1e2; 
+    background-color:#cc0000; 
 }
 #question .text-std{
     height: 400px;
     display: table;
     text-align: center;
-    width: 100%
+    width: 100%;
+    font-size:50px;
 
 }
 .countdown-container{
@@ -38,7 +51,7 @@
     margin-top: 20px;
 }
 .button.selected{
-    background-color: grey; 
+    background-color: #6a0e14; 
 }
 .button.true.showAnswer{
     background-color: green; 
@@ -70,22 +83,14 @@ text {
     padding: 0;
 }
 
-#wrapper {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-}
 
-#background {
-    top: -150px;
-    position: fixed;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    z-index: -100;
+#backgroundImage {
+    background-size:cover;
+    background-image: url("https://www.skanetrafiken.se/globalassets/bakgrundsbilder/web2landet_mini.jpg");
 }
-
+.highcharts-background {
+    opacity: 0;
+}
 .container-bottom {
     position: fixed;
     bottom: 40px;
@@ -98,7 +103,7 @@ text {
 #question,
 .answer {
     /*gradient background*/
-    background-color: #1ba1e2;
+    background-color: #cc0000;
     color:white;
     /*background: -webkit-gradient(linear, left top, left bottom, from(#7E57C2), to(#4527A0));
     background: -webkit-linear-gradient(top, #7E57C2, #4527A0);
@@ -111,8 +116,13 @@ text {
     /*padding*/
     padding: 20px;
     margin: 10px;
-    opacity: 0.9;
+    opacity: 0.85;
     height:15%;
+
+}
+
+#question {
+       
 
 }
 
@@ -147,6 +157,7 @@ ul {
     column-count: 2;
 }
 
+
     ul li {
         display: inline-block;
         float: left;
@@ -159,4 +170,5 @@ ul {
     -ms-transition: width .1s ease;
     -o-transition: width .1s ease;
     transition: width .1s ease;
+    background: #e33a43;
 }

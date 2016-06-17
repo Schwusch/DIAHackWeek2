@@ -12,7 +12,7 @@ FlowRouter.notFound = {
 FlowRouter.route('/mainscreen', {
   name: 'mainScreen',
   action() {
-    BlazeLayout.render('body', { main: 'question', lower: 'alternatives'});
+    BlazeLayout.render('body', { navbar : "navbar", main: 'question', lower: 'alternatives'});
   },
 });
 
@@ -20,19 +20,19 @@ FlowRouter.route('/mainscreen', {
 FlowRouter.route('/', {
   name: 'phoneScreen',
   action() {
-    BlazeLayout.render('body', { main: 'phoneScreen'});
+    BlazeLayout.render('body', {navbar : "navbar", main: 'phoneScreen'});
   },
 });
 
 FlowRouter.route('/mainscreencharts', {
   name: 'charts',
   action() {
-    BlazeLayout.render('body', { main: 'charts',lower: 'alternatives'});
+    BlazeLayout.render('body', { navbar : "navbar", main: 'charts',lower: 'alternatives'});
   },
 });
 FlowRouter.route('/charts', {
   name: 'charts',
   action() {
-    BlazeLayout.render('body', { main: 'charts',});
+    BlazeLayout.render('body', { navbar : "navbar", main: 'charts',});
   },
 });
